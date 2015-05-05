@@ -403,21 +403,21 @@ class PhysicalQuantity:
     def sin(self):
         if self.unit.isAngle():
             return np.sin(self.value * \
-                             self.unit.conversionFactorTo(_unit_table['rad']))
+                          self.unit.conversionFactorTo(_unit_table['rad']))
         else:
             raise TypeError('Argument of sin must be an angle')
 
     def cos(self):
         if self.unit.isAngle():
             return np.cos(self.value * \
-                             self.unit.conversionFactorTo(_unit_table['rad']))
+                          self.unit.conversionFactorTo(_unit_table['rad']))
         else:
             raise TypeError('Argument of cos must be an angle')
 
     def tan(self):
         if self.unit.isAngle():
             return np.tan(self.value * \
-                             self.unit.conversionFactorTo(_unit_table['rad']))
+                          self.unit.conversionFactorTo(_unit_table['rad']))
         else:
             raise TypeError('Argument of tan must be an angle')
 
