@@ -5,6 +5,22 @@ import numpy as np
 import numpy.oldnumeric
 
 
+def int_sum_new(a, axis=0):
+    return np.add.reduce(a, axis)
+
+
+def int_sum_old(a, axis=0):
+    return numpy.oldnumeric.add.reduce(a, axis)
+
+
+def zeros_st_new(shape, other):
+    return np.zeros(shape, dtype=other.dtype)
+
+
+def zeros_st_old(shape, other):
+    return numpy.oldnumeric.zeros(shape, dtype=other.dtype)
+
+
 def sin_new(quantity):
     if quantity.unit.isAngle():
         return np.sin(quantity.value * \
@@ -127,8 +143,32 @@ def pow_old(physunit, other):
     raise TypeError('Only integer and inverse integer exponents allowed')
 
 
+def round_new(x):
+    if np.greater(x, 0.):
+        return np.floor(x)
+    else:
+        return np.ceil(x)
+
+
+def round_old(x):
+    if numpy.oldnumeric.greater(x, 0.):
+        return numpy.oldnumeric.floor(x)
+    else:
+        return numpy.oldnumeric.ceil(x)
+
+
 class TestQuantityNumpyOldnumeric(unittest.TestCase):
     def setUp(self):
+        self.arrays = []
+        self.arrays.append([1, 2, 3])
+        self.arrays.append([1.9, -2.2, 3.4])
+        self.matrix = [[3.8, 4.5],
+                       [-3.4, 546.6]]
+        self.shapes = []
+        self.shapes.append((5, np.array([6])))
+        self.shapes.append((5, np.array([6.])))
+        self.shapes.append(((3, 2), np.array([6])))
+        self.shapes.append(((3, 2), np.array([6.])))
         self.angles = []
         self.angles.append(Quantity('1.4 rad'))
         self.angles.append(Quantity('2 rad'))
@@ -139,6 +179,19 @@ class TestQuantityNumpyOldnumeric(unittest.TestCase):
         self.phyunit **= 5
         self.exps = [0, 1, 2, 1. / 5, 1. / (5. + 1e-12), 1. / (5. - 1e-12)]
         self.badexps = [0., 2., 1. / 6, 1. / (5. + 1e-8)]
+        self.values = [0, 1, 0., 1e-10, 4.049, 10.05, 3 - 1e-10]
+        self.values += [-1, -1e-10, -4.049, -10.05, -(3 - 1e-10)]
+
+    def testint_sum(self):
+        for array in self.arrays:
+            self.assertAlmostEqual(int_sum_new(array), int_sum_old(array))
+        self.assertAlmostEqual(int_sum_new(self.matrix).tolist(),
+                               int_sum_old(self.matrix).tolist())
+
+    def testzero_st(self):
+        for (shape, other) in self.shapes:
+            self.assertEqual(zeros_st_new(shape, other).tolist(),
+                             zeros_st_old(shape, other).tolist())
 
     def testsin(self):
         for angle in self.angles:
@@ -170,6 +223,13 @@ class TestQuantityNumpyOldnumeric(unittest.TestCase):
             with self.assertRaises(TypeError):
                 pow_new(self.phyunit, exp)
                 pow_old(self.phyunit, exp)
+
+    def testround(self):
+        for value in self.values:
+            self.assertEqual(round_new(value), round_old(value))
+
+    def testpi(self):
+        self.assertAlmostEqual(np.pi, numpy.oldnumeric.pi)
 
 if __name__ == '__main__':
     unittest.main()
