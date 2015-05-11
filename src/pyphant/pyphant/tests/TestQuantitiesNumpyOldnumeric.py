@@ -1,3 +1,38 @@
+# -*- coding: utf-8 -*-
+
+# Copyright (c) 2009, Rectorate of the University of Freiburg
+# Copyright (c) 2009-2010, Andreas W. Liehr (liehr@users.sourceforge.net)
+# Copyright (c) 2010-2015, Servicegroup Scientific Information Processing, FMF
+# (servicegruppe.wissinfo@fmf.uni-freiburg.de)
+# All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+#
+# * Redistributions of source code must retain the above copyright
+#   notice, this list of conditions and the following disclaimer.
+# * Redistributions in binary form must reproduce the above copyright
+#   notice, this list of conditions and the following disclaimer in the
+#   documentation and/or other materials provided with the distribution.
+# * Neither the name of the Freiburg Materials Research Center,
+#   University of Freiburg nor the names of its contributors may be used to
+#   endorse or promote products derived from this software without specific
+#   prior written permission.
+#
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
+# IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+# TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+# PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER
+# OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+# EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+# PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+# PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+# LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+# NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+# SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+
 import unittest
 from pyphant.quantities import Quantity, _unit_table, PhysicalUnit,\
                                NumberDict, _base_names
@@ -177,8 +212,10 @@ class TestQuantityNumpyOldnumeric(unittest.TestCase):
         self.length = Quantity('5.3 m')
         self.phyunit = PhysicalUnit('m', 1., [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
         self.phyunit **= 5
-        self.exps = [0, 1, 2, 1. / 5, 1. / (5. + 1e-12), 1. / (5. - 1e-12)]
-        self.badexps = [0., 2., 1. / 6, 1. / (5. + 1e-8)]
+        self.exps = [0, 1, 2, 1. / 5, 1. / (5. + 1e-12), 1. / (5. - 1e-12),
+                     -1. / (5. + 1e-12), -1. / (5. - 1e-12)]
+        self.badexps = [0., 2., 1. / 6, 1. / (5. + 1e-8), 1. / (5. - 1e-8),
+                        -1. / (5. + 1e-8), -1. / (5. - 1e-8)]
         self.values = [0, 1, 0., 1e-10, 4.049, 10.05, 3 - 1e-10]
         self.values += [-1, -1e-10, -4.049, -10.05, -(3 - 1e-10)]
 
@@ -196,6 +233,8 @@ class TestQuantityNumpyOldnumeric(unittest.TestCase):
     def testsin(self):
         for angle in self.angles:
             self.assertAlmostEqual(sin_new(angle), sin_old(angle))
+
+    def testsin_error(self):
         with self.assertRaises(TypeError):
             sin_new(self.length)
             sin_old(self.length)
@@ -203,6 +242,8 @@ class TestQuantityNumpyOldnumeric(unittest.TestCase):
     def testcos(self):
         for angle in self.angles:
             self.assertAlmostEqual(cos_new(angle), cos_old(angle))
+
+    def testcos_error(self):
         with self.assertRaises(TypeError):
             cos_new(self.length)
             cos_old(self.length)
@@ -210,6 +251,8 @@ class TestQuantityNumpyOldnumeric(unittest.TestCase):
     def testtan(self):
         for angle in self.angles:
             self.assertAlmostEqual(tan_new(angle), tan_old(angle))
+
+    def testtan_error(self):
         with self.assertRaises(TypeError):
             tan_new(self.length)
             tan_old(self.length)
@@ -219,6 +262,8 @@ class TestQuantityNumpyOldnumeric(unittest.TestCase):
             self.assertAlmostEqual(pow_new(self.phyunit, exp),
                                    pow_old(self.phyunit, exp)
                                    )
+
+    def testpow_error(self):
         for exp in self.badexps:
             with self.assertRaises(TypeError):
                 pow_new(self.phyunit, exp)
