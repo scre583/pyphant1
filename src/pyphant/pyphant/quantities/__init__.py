@@ -557,9 +557,9 @@ class PhysicalUnit:
         if isinstance(other, int):
             return PhysicalUnit(other*self.names, pow(self.factor, other),
                                 map(lambda x,p=other: x*p, self.powers))
-        if isinstance(other, float):
+        if (isinstance(other, float)) and (other != 0.):
             inv_exp = 1./other
-            rounded = int(np.floor(inv_exp+0.5))
+            rounded = round(inv_exp)
             if abs(inv_exp-rounded) < 1.e-10:
                 if reduce(lambda a, b: a and b,
                           map(lambda x, e=rounded: x%e == 0, self.powers)):
