@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Copyright (c) 2010-2015, Servicegroup Scientific Information Processing, FMF
+# Copyright (c) 2015, Servicegroup Scientific Information Processing, FMF
 # (servicegruppe.wissinfo@fmf.uni-freiburg.de)
 # All rights reserved.
 #
