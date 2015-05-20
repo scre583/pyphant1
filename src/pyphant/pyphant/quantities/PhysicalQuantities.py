@@ -3,6 +3,8 @@
 # Copyright (c) 1998-2007, Konrad Hinsen <hinsen@cnrs-orleans.fr>
 # Copyright (c) 2008-2009, Rectorate of the University of Freiburg
 # Copyright (c) 2010, Andreas W. Liehr <liehr@users.sourceforge.net>
+# Copyright (c) 2010-2015, Servicegroup Scientific Information Processing, FMF
+# (servicegruppe.wissinfo@fmf.uni-freiburg.de)
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -114,11 +116,11 @@ class NumberDict(dict):
             new[key] = self[key]/other
         return new
 
-import numpy.oldnumeric
+import numpy as np
 def int_sum(a, axis=0):
-    return numpy.oldnumeric.add.reduce(a, axis)
+    return np.add.reduce(a, axis)
 def zeros_st(shape, other):
-    return numpy.oldnumeric.zeros(shape, dtype=other.dtype)
+    return np.zeros(shape, dtype=other.dtype)
 from numpy import ndarray as array_type
 
 
@@ -402,22 +404,22 @@ class PhysicalQuantity:
 
     def sin(self):
         if self.unit.isAngle():
-            return numpy.oldnumeric.sin(self.value * \
-                             self.unit.conversionFactorTo(_unit_table['rad']))
+            return np.sin(self.value * \
+                          self.unit.conversionFactorTo(_unit_table['rad']))
         else:
             raise TypeError('Argument of sin must be an angle')
 
     def cos(self):
         if self.unit.isAngle():
-            return numpy.oldnumeric.cos(self.value * \
-                             self.unit.conversionFactorTo(_unit_table['rad']))
+            return np.cos(self.value * \
+                          self.unit.conversionFactorTo(_unit_table['rad']))
         else:
             raise TypeError('Argument of cos must be an angle')
 
     def tan(self):
         if self.unit.isAngle():
-            return numpy.oldnumeric.tan(self.value * \
-                             self.unit.conversionFactorTo(_unit_table['rad']))
+            return np.tan(self.value * \
+                          self.unit.conversionFactorTo(_unit_table['rad']))
         else:
             raise TypeError('Argument of tan must be an angle')
 
@@ -513,9 +515,9 @@ class PhysicalUnit:
         if isinstance(other, int):
             return PhysicalUnit(other*self.names, pow(self.factor, other),
                                 map(lambda x,p=other: x*p, self.powers))
-        if isinstance(other, float):
+        if (isinstance(other, float)) and (other != 0.):
             inv_exp = 1./other
-            rounded = int(numpy.oldnumeric.floor(inv_exp+0.5))
+            rounded = round(inv_exp)
             if abs(inv_exp-rounded) < 1.e-10:
                 if reduce(lambda a, b: a and b,
                           map(lambda x, e=rounded: x%e == 0, self.powers)):
@@ -660,10 +662,10 @@ def _findUnit(unit):
     return unit
 
 def _round(x):
-    if numpy.oldnumeric.greater(x, 0.):
-        return numpy.oldnumeric.floor(x)
+    if np.greater(x, 0.):
+        return np.floor(x)
     else:
-        return numpy.oldnumeric.ceil(x)
+        return np.ceil(x)
 
 
 def _convertValue (value, src_unit, target_unit):
@@ -777,7 +779,7 @@ for unit in _unit_table.keys():
 # Fundamental constants
 _help.append('Fundamental constants:')
 
-_unit_table['pi'] = numpy.oldnumeric.pi
+_unit_table['pi'] = np.pi
 _addUnit('c', '299792458.*m/s', 'speed of light')
 _addUnit('mu0', '4.e-7*pi*N/A**2', 'permeability of vacuum')
 _addUnit('eps0', '1/mu0/c**2', 'permittivity of vacuum')
