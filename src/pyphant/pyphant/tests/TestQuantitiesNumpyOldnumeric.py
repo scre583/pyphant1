@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-# Copyright (c) 2009, Rectorate of the University of Freiburg
-# Copyright (c) 2009-2010, Andreas W. Liehr (liehr@users.sourceforge.net)
 # Copyright (c) 2010-2015, Servicegroup Scientific Information Processing, FMF
 # (servicegruppe.wissinfo@fmf.uni-freiburg.de)
 # All rights reserved.
