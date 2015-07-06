@@ -212,7 +212,7 @@ class TestQuantityNumpyOldnumeric(unittest.TestCase):
         self.phyunit **= 5
         self.exps = [0, 1, 2, 1. / 5, 1. / (5. + 1e-12), 1. / (5. - 1e-12),
                      -1. / (5. + 1e-12), -1. / (5. - 1e-12)]
-        self.badexps = [0., 2., 1. / 6, 1. / (5. + 1e-8), 1. / (5. - 1e-8),
+        self.badexps = [2., 1. / 6, 1. / (5. + 1e-8), 1. / (5. - 1e-8),
                         -1. / (5. + 1e-8), -1. / (5. - 1e-8)]
         self.values = [0, 1, 0., 1e-10, 4.049, 10.05, 3 - 1e-10]
         self.values += [-1, -1e-10, -4.049, -10.05, -(3 - 1e-10)]
@@ -235,6 +235,7 @@ class TestQuantityNumpyOldnumeric(unittest.TestCase):
     def testsin_error(self):
         with self.assertRaises(TypeError):
             sin_new(self.length)
+        with self.assertRaises(TypeError):
             sin_old(self.length)
 
     def testcos(self):
@@ -244,6 +245,7 @@ class TestQuantityNumpyOldnumeric(unittest.TestCase):
     def testcos_error(self):
         with self.assertRaises(TypeError):
             cos_new(self.length)
+        with self.assertRaises(TypeError):
             cos_old(self.length)
 
     def testtan(self):
@@ -253,6 +255,7 @@ class TestQuantityNumpyOldnumeric(unittest.TestCase):
     def testtan_error(self):
         with self.assertRaises(TypeError):
             tan_new(self.length)
+        with self.assertRaises(TypeError):
             tan_old(self.length)
 
     def testpow(self):
@@ -265,7 +268,13 @@ class TestQuantityNumpyOldnumeric(unittest.TestCase):
         for exp in self.badexps:
             with self.assertRaises(TypeError):
                 pow_new(self.phyunit, exp)
+            with self.assertRaises(TypeError):
                 pow_old(self.phyunit, exp)
+        # TypeError occurs now if the exponent is 0.
+        with self.assertRaises(TypeError):
+            pow_new(self.phyunit, 0.)
+        with self.assertRaises(ZeroDivisionError):
+            pow_old(self.phyunit, 0.)
 
     def testround(self):
         for value in self.values:
