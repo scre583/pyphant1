@@ -52,9 +52,8 @@ class TestQuantity(unittest.TestCase):
 
     def test_degC(self):
         temperature = Quantity('0 degC')
-        self.assertEqual(temperature.value, 0)
-        self.assertEqual(Quantity('0 degC').inBaseUnits(),
-                         Quantity('-273.15 K'))
+        self.assertEqual(temperature.inBaseUnits(),
+                         Quantity('273.15 K'))
         
     def testTextualQuantitySpecification(self):
         self.assertEqual(Quantity('1V'),

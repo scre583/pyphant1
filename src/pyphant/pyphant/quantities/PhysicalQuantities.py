@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
 
 # Copyright (c) 1998-2007, Konrad Hinsen <hinsen@cnrs-orleans.fr>
-# Copyright (c) 2008-2009, Rectorate of the University of Freiburg
-# Copyright (c) 2010, Andreas W. Liehr <liehr@users.sourceforge.net>
-# Copyright (c) 2010-2015, Servicegroup Scientific Information Processing, FMF
-# (servicegruppe.wissinfo@fmf.uni-freiburg.de)
+# Copyright (c) 2008-2015, Rectorate of the University of Freiburg
+# Copyright (c) 2010-2016, Andreas W. Kempa-Liehr <liehr@users.sourceforge.net>
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -267,7 +265,6 @@ class PhysicalQuantity:
             return value*unit.factor
         else:
             return self.__class__(value, unit)
-
     def __rdiv__(self, other):
         if not isPhysicalQuantity(other):
             return self.__class__(other/self.value, pow(self.unit, -1))
@@ -360,7 +357,7 @@ class PhysicalQuantity:
         i.e. SI units in most cases
         @rtype: L{PhysicalQuantity}
         """
-        new_value = self.value * self.unit.factor
+        new_value = self.value * self.unit.factor + self.unit.offset
         num = ''
         denom = ''
         for i in xrange(9):
