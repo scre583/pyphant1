@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-# Copyright (c) 2009, Rectorate of the University of Freiburg
-# Copyright (c) 2009-2011, Andreas W. Liehr (liehr@users.sourceforge.net)
+# Copyright (c) 2009-2013, Rectorate of the University of Freiburg
+# Copyright (c) 2009-2016, Andreas W. Kempa-Liehr (liehr@users.sourceforge.net)
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -105,6 +105,15 @@ class TestStr2unit(unittest.TestCase):
         result = str2unit("1 Grav", FMFversion="1.0")
         self.assertEqual(result, str2unit('6.67259e-11 m**3/kg/s**2'))
 
+    def testGravitationalConstant(self):
+        result = str2unit("1 Grav", FMFversion="1.0")
+        self.assertEqual(result, str2unit('6.67259e-11 m**3/kg/s**2'))
+
+
+    def testDegC(self):
+        for version in ['1.0', '1.1']:
+            result = str2unit("9.0 degC", FMFversion=version)
+            self.assertEqual(result.value, 9, 'Error in FMF version '+version)
 
 if __name__ == "__main__":
     import sys
