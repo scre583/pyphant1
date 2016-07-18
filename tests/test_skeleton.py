@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import pytest
-from pyphant_data.skeleton import fib
+from pyphant_fmf.skeleton import fib
 
 __author__ = "Andreas Kempa-Liehr"
 __copyright__ = "Andreas Kempa-Liehr"

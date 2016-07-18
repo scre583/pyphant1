@@ -1,8 +1,8 @@
 ============
-pyphant_data
+pyphant_fmf
 ============
 
-This is the documentation of **pyphant_data**.
+This is the documentation of **pyphant_fmf**.
 
 .. note::
 

@@ -1,5 +1,5 @@
 ============
-pyphant_data
+pyphant_fmf
 ============
 
 
