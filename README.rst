@@ -3,7 +3,7 @@ pyphant_fmf
 ============
 
 
-Pyphant_data - Support reading and writing Full-Metadata Files
+pyphant_fmf - Support reading and writing Full-Metadata Files
 
 
 Description
