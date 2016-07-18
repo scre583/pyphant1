@@ -32,13 +32,13 @@
 
 
 import unittest, numpy
-from pyphant.core.DataContainer import (
+from pyphant_data.DataContainer import (
     FieldContainer, SampleContainer, assertEqual
     )
-from pyphant.quantities import Quantity
-from pyphant.quantities.ParseQuantities import str2unit
+from pyphant_data.quantities import Quantity
+from pyphant_data.quantities.ParseQuantities import str2unit
 from copy import deepcopy
-from pyphant.core import LoadFMF
+from pyphant_data import LoadFMF
 import pkg_resources
 
 #Estimated floating point accuracy, with factor 1.7 taking account of detected floating point errors

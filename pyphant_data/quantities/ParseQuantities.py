@@ -35,8 +35,8 @@ u"""
 
 
 import mx.DateTime.ISO
-from pyphant.quantities import Quantity
-from pyphant.quantities.PhysicalQuantities import PhysicalQuantity
+from pyphant_data.quantities import Quantity
+from pyphant_data.quantities.PhysicalQuantities import PhysicalQuantity
 
 import logging
 _logger = logging.getLogger("pyphant")

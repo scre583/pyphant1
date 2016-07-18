@@ -58,8 +58,8 @@ import scipy
 import copy
 import hashlib
 import numpy
-from pyphant.quantities import (isQuantity, Quantity, _prefixes)
-from pyphant.core.DataContainer import DataContainer, enc, _logger
+from quantities import (isQuantity, Quantity, _prefixes)
+from DataContainer import DataContainer, enc, _logger
 from types import NoneType
 
 #Default variables of indices
