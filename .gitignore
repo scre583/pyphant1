@@ -12,7 +12,7 @@ __pycache__/*
 .*.swp
 
 # Project files
-.ropeproject
+.ropeproject/
 .project
 .pydevproject
 .settings
@@ -32,10 +32,30 @@ junit.xml
 coverage.xml
 
 # Build and docs folder/files
-build/*
-dist/*
+build
+dist
 sdist/*
 docs/api/*
 docs/_build/*
 cover/*
 MANIFEST
+DEBUG
+PKG-INFO
+SOURCES.txt
+dependency_links.txt
+entry_points.txt
+requires.txt
+top_level.txt
+.svn
+
+# Temporary files
+\#*\#
+
+# LaTeX files
+*.aux
+*.log
+*.out
+*.bst
+*.bbl
+
+

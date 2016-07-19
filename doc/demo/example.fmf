@@ -1,0 +1,111 @@
+# -*- fmf-version: 1.0; coding: utf-8 -*-
+[*reference]
+title: Demonstrating the flexibility of the Full-Metadata-Format
+creator: Andreas W. Liehr
+created: 2008-10-29
+place: Freiburger Materialforschungszentrum, Universität Freiburg, Deutschland
+[Textual values]
+word: Hello!
+sentence: Hello World!
+timestamp: 2008-10-31 12:00:59.438151
+comma separated list: world, die Welt, el mundo, monde
+inside quotation: Arthur C. Clarke's "The Sentinel"
+single quote: 'Freiburger Materialforschungszentrum, Universität Freiburg, Deutschland'
+double quotation mark: "Freiburger Materialforschungszentrum, Universität Freiburg, Deutschland"
+multiline: '''A multiline value, 
+that spans more than one line :-)
+The line breaks are included in the value.'''
+Another multiline: """A multiline value, 
+that spans more than one line :-)"""
+Enclosed quotation marks: """ Andreas says: "Hello World!" """
+[Numerical values]
+#Note, that the 'key' is arbitrary, but has to be unique within a section
+integer: 1
+list of integers: 1, 2, 3, 4, 5
+float: 1.0
+float with leading dot: .1
+float with exponential: 1e-10
+float with Exponential: -1.1E10
+list of floats: 1.0, .1, 1e-10, -1.1E10
+complex: 1+2j
+Complex: 1.1+2j
+Complex number with zero real part : 2j
+Complex number with zero imaginary part: 1+0j
+list of complex: 1+2j, 1.1+2j
+[Boolean values]
+true1: True
+true2: true
+true3: TRUE
+false1: False
+false2: false
+false3: FALSE
+list of booleans: True, true, TRUE, False, false, FALSE
+[Quantities]
+voltage: 1V
+temperature in Celsius: 22 degC
+resistance: 2.0 kg*m^2*A^-2*s^-3
+arbitrary units: 10 a.u.
+distance from Earth to Sun: 1 AU
+[Quantities with error]
+voltage: 1 V +- 1 mV
+current: 1 A +/- 0.001 A
+energy:  1 J \pm 1 mJ
+work:    1 W +- 0.1%
+voltage in brackets: (1 +- 0.001) V
+current in brackets: (1 +- 0.1%)  A
+trailing amplitude: (1 +- 0.01) 2 ohm
+trailing amplitude, relative error: (1 +- 1%) 2 ohm
+estimated parameter: 1 \pm 0.1
+another estimated parameter: 1 \pm 1%
+list of quantities: 1V, 22 degC,(1 +- 1%) 2 ohm
+[Variables]
+number: N = 2
+voltage: U = 1V
+temperature in Celsius: T_C = 22 degC
+temperature in Fahrenheit: T = 22 degF
+resistance: \omega = 2.0 kg*m^2*A^-2*s^-3
+resistance 2: \omega = 2.0 kg*m**2*A**-2*s**-3
+normed variable: n = 10 a.u.
+[Physical Quantities with error]
+voltage: U = 1 V +- 1 mV
+current: I = 1 A +/- 0.001 A
+energy:  E = 1 J \pm 1 mJ
+work:    A = 1 W +- 0.1%
+voltage in brackets: U = (1 +- 0.001) V
+current in brackets: I = (1 +- 0.1%)  A
+trailing amplitude: \omega = (1 +- 0.01) 2 ohm
+trailing amplitude, relative error: \omega = (1 +- 1%) 2 ohm
+estimated parameter: p = 1 \pm 0.1
+another estimated parameter: p = 1 \pm 1%
+list of quantities: number: N = 2, U = 1V, T_C = 22 degC
+[Datetime stamps]
+date: 2008-12-16
+week date: 2008-W47-1 
+list of dates: 2008-11-17,2008-1-3,2006-2-17,2008-W47-1
+datetime: 2008-12-16T16:51
+another datetime: 2008-12-16 16:51
+datetime with second: 2008-12-16T16:51:05
+datetime UTC: 2008-12-16T16:51Z
+datetime+2h: 2006-04-23 14:25:51+02:00
+[*table definitions]
+table: T
+mixed: M
+[*data definitions: T]
+String: S
+Integer: I
+Float with dot: Fd
+Float with exponent: Fe
+Complex: C
+Missing Value: V_m
+Infinite Value: V_i
+[*data: T]
+H_2	1	1.	1e1	1+0j	nan	inf	
+O_2	2	.2	2E1	2+.1j	NaN	INF
+O 2	2	.2	2E1	2.+2j	NAN	Inf
+[*data definitions: M]
+String: S
+Complex: C
+Float: F
+[*data: M]
+N_2	1	2
+2	1+1j	2.1
