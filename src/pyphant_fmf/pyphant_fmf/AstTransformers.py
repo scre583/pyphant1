@@ -33,7 +33,7 @@ This module ships classes for SampleContainer algebra expressions
 based on python's abstract syntax trees.
 """
 
-from pyphant.quantities import Quantity
+from pyphant_fmf.quantities import Quantity
 from ast import (NodeTransformer, fix_missing_locations, Name, Load,
                  BinOp, Num, Mult, Compare, BoolOp, And, Add, Sub, Div, Or,
                  Call, Not, Expression)
