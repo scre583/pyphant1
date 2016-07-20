@@ -465,6 +465,16 @@ class SampleContainer(DataContainer):
                                  attributes=copy.deepcopy(self.attributes))
         return result
 
+    def toDataFrame(self):
+        """Create a pandas dataframe out of the data in this container."""
+        import pandas as pd
+        df = pd.DataFrame()
+
+        for c in self.columns:
+            df[c.shortname] = c.data
+
+        return df
+
 
 def assertEqual(con1, con2, rtol=1e-5, atol=1e-8):
     diagnosis = StringIO.StringIO()
