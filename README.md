@@ -99,3 +99,14 @@ If this command is not available on your platform, the GUI can also be
 invoked by running
 *src/pyphant/pyphant/wxgui2/wxPyphantApplication.py* with your python
 interpreter.
+
+## Work Arounds
+
+If you cannot successfully install due to restrictions on your computer
+the following lines can be used:
+
+    $ git clone -b splitting_fmf https://github.com/kempa-liehr/pyphant1.git
+    $ pip install requests[security]
+    $ pip install -U pip
+    $ cd pyphant1/src/pyphant_fmf
+    $ pip install -e .
