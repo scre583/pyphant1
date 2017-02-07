@@ -60,7 +60,7 @@ setup(
     license="BSD",
     description=__doc__,
     install_requires=[
-        'pyphant>=1.0b4.dev',
+       # 'pyphant>=1.0b4.dev',
         'numpy',
         'scipy',
         'matplotlib',
